@@ -29,5 +29,10 @@ iface ens9.278 inet static
 
 EOF
 
+sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1'
+
+iptables -t nat -A POSTROUTING -o ens3 -s 10.0.0.0/24 -j MASQUERADE
+
+
 service networking restart
 
